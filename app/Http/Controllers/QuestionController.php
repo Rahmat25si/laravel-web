@@ -4,21 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class HomeController extends Controller
+class QuestionController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-public function index()
-{
-    $data = [
-        'username'        => 'Siddiq Quranique',
-        'last_login'      => date('Y-m-d H:i:s'),
-        'list_pendidikan' => ['SD', 'SMP', 'SMA', 'S1', 'S2', 'S3']
-    ];
-
-    return view('home', $data);
-}
+    public function index()
+    {
+        //
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -31,10 +25,10 @@ public function index()
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-        //
-    }
+   public function store(Request $request)
+{
+    return $request->all();
+}
 
     /**
      * Display the specified resource.

@@ -86,7 +86,34 @@
 <p> {{ $last_login }} </p>
         </div>
     </section>
-
+<!-- Form Submit Data Laravel -->
+<div class="container mt-4">
+    <h3>Form Login (Latihan Submit Data)</h3>
+    <form action="{{ url('auth/login') }}" method="POST">
+        @csrf
+        <div class="mb-3">
+            <label>Username</label>
+            <input type="text" name="username" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label>Password</label>
+            <input type="password" name="password" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+<!-- Form Pertanyaan -->
+<div class="container mt-4">
+    <h3>Form Pertanyaan</h3>
+    <form action="{{ route('question.store') }}" method="POST">
+        @csrf
+        <div class="mb-3">
+            <label class="form-label">Pertanyaan Anda</label>
+            <input type="text" name="question" class="form-control" placeholder="Tuliskan pertanyaan di sini..." required>
+        </div>
+        <button type="submit" class="btn btn-primary">Kirim Pertanyaan</button>
+    </form>
+</div>
     <!-- Content Section -->
     <section id="content" class="container ">
         <div class="row">

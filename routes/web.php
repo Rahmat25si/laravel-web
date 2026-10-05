@@ -16,3 +16,12 @@ Route::get('/mahasiswa', function () {
 });
 
 Route::get('/home', [HomeController::class, 'index']);
+use Illuminate\Http\Request;
+
+Route::post('/auth/login', function (Request $request) {
+    $username = $request->input('username');
+    return 'Username yang berhasil dikirim adalah: ' . $username;
+});
+use App\Http\Controllers\QuestionController;
+
+Route::post('/question/store', [QuestionController::class, 'store'])->name('question.store');
