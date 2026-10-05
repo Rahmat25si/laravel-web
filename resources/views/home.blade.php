@@ -103,17 +103,7 @@
     </form>
 </div>
 <!-- Form Pertanyaan -->
-<div class="container mt-4">
-    <h3>Form Pertanyaan</h3>
-    <form action="{{ route('question.store') }}" method="POST">
-        @csrf
-        <div class="mb-3">
-            <label class="form-label">Pertanyaan Anda</label>
-            <input type="text" name="question" class="form-control" placeholder="Tuliskan pertanyaan di sini..." required>
-        </div>
-        <button type="submit" class="btn btn-primary">Kirim Pertanyaan</button>
-    </form>
-</div>
+
     <!-- Content Section -->
     <section id="content" class="container ">
         <div class="row">
@@ -153,6 +143,46 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-6">
+
+    <div class="card mt-4">
+    <div class="card-body">
+        <h5 class="card-title">Form Pertanyaan</h5>
+
+        {{-- Tambahkan kode blok alert error ini --}}
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        <form action="{{ route('question.store') }}" method="POST">
+            @csrf
+
+            <div class="mb-3">
+                <label class="form-label">Nama</label>
+                <input type="text" class="form-control" name="nama" placeholder="Masukkan nama Anda">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input type="email" class="form-control" name="email" placeholder="Masukkan email Anda">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Pertanyaan</label>
+                <textarea class="form-control" name="pertanyaan" rows="3" placeholder="Tuliskan pertanyaan di sini..."></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Kirim Pertanyaan</button>
+        </form>
+    </div>
+</div>
+</div>
                 </div>
 
                 {{-- Badge, List & Card --}}
