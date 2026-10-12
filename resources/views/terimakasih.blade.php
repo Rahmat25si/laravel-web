@@ -146,27 +146,22 @@
         <div class="content">
             <div class="section-title">Rincian Data Pengirim</div>
 
-            <div class="data-row">
-                <span class="data-label">Nama</span>
-                <span class="data-value">{{ $nama }}</span>
-            </div>
+          <div class="data-row">
+    <span class="data-label">Nama</span>
+    <span class="data-value">{{ session('nama', '-') }}</span>
+</div>
 
-            <div class="data-row">
-                <span class="data-label">Email</span>
-                <span class="data-value">{{ $email }}</span>
-            </div>
+<div class="data-row">
+    <span class="data-label">Email</span>
+    <span class="data-value">{{ session('email', '-') }}</span>
+</div>
 
-            <div class="question-box">
-                <span class="data-label">Pertanyaan Anda:</span>
-                <div class="question-content">
-                    "{{ $pertanyaan }}"
-                </div>
-            </div>
-
-            <!-- Tombol Kembali -->
-            <a href="{{ url('/') }}" class="btn-kembali">← Kembali ke Beranda</a>
-        </div>
+<div class="question-box">
+    <span class="data-label">Pertanyaan Anda:</span>
+    <div class="question-content">
+        "{{ session('pertanyaan', '-') }}"
     </div>
+</div>
 
 </body>
 </html>

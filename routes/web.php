@@ -25,3 +25,7 @@ Route::post('/auth/login', function (Request $request) {
 use App\Http\Controllers\QuestionController;
 
 Route::post('/question/store', [QuestionController::class, 'store'])->name('question.store');
+
+Route::get('/terimakasih', function () {
+    return view('terimakasih');
+})->name('terimakasih');
