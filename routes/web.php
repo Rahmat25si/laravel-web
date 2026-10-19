@@ -29,3 +29,7 @@ Route::post('/question/store', [QuestionController::class, 'store'])->name('ques
 Route::get('/terimakasih', function () {
     return view('terimakasih');
 })->name('terimakasih');
+
+use App\Http\Controllers\PelangganController;
+
+Route::resource('pelanggan', PelangganController::class);

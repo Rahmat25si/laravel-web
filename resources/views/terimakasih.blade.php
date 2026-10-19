@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -132,6 +133,7 @@
         }
     </style>
 </head>
+
 <body>
 
     <div class="card">
@@ -146,22 +148,23 @@
         <div class="content">
             <div class="section-title">Rincian Data Pengirim</div>
 
-          <div class="data-row">
-    <span class="data-label">Nama</span>
-    <span class="data-value">{{ session('nama', '-') }}</span>
-</div>
+            <div class="data-row">
+                <span class="data-label">Nama</span>
+                <span class="data-value">{{ session('nama', '-') }}</span>
+            </div>
 
-<div class="data-row">
-    <span class="data-label">Email</span>
-    <span class="data-value">{{ session('email', '-') }}</span>
-</div>
+            <div class="data-row">
+                <span class="data-label">Email</span>
+                <span class="data-value">{{ session('email', '-') }}</span>
+            </div>
 
-<div class="question-box">
-    <span class="data-label">Pertanyaan Anda:</span>
-    <div class="question-content">
-        "{{ session('pertanyaan', '-') }}"
-    </div>
-</div>
+            <div class="question-box">
+                <span class="data-label">Pertanyaan Anda:</span>
+                <div class="question-content">
+                    "{{ session('pertanyaan', '-') }}"
+                </div>
+            </div>
 
 </body>
+
 </html>
