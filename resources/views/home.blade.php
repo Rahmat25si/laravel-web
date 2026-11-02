@@ -1,4 +1,4 @@
-@extends('admin.layouts')
+@extends('layouts.admin.app')
 
 @section('content')
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
@@ -14,7 +14,9 @@
             <h5 class="fw-bold">Halo, {{ $username ?? 'Admin' }}!</h5>
             <p class="text-muted">Gunakan menu sidebar di sebelah kiri untuk mengelola data pelanggan.</p>
             <div>
-                <a href="{{ route('pelanggan.index') }}" class="btn btn-gray-800">Lihat Data Pelanggan</a>
+               <a href="{{ route('pelanggan.index') }}" class="btn btn-primary">
+    Lihat Data Pelanggan
+</a>
             </div>
         </div>
     </div>

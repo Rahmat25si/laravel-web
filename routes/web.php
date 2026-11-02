@@ -33,3 +33,6 @@ Route::get('/terimakasih', function () {
 use App\Http\Controllers\PelangganController;
 
 Route::resource('pelanggan', PelangganController::class);
+use App\Http\Controllers\UserController;
+
+Route::resource('user', UserController::class);

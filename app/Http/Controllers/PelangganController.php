@@ -10,19 +10,19 @@ class PelangganController extends Controller
     /**
      * Menampilkan daftar semua data pelanggan.
      */
-    public function index()
+   public function index()
 {
     $pelanggan = Pelanggan::all();
-    return view('admin.pelanggan.index', compact('pelanggan'));
+    return view('pelanggan.index', compact('pelanggan'));
 }
 
     /**
      * Menampilkan form untuk menambah data pelanggan baru.
      */
-    public function create()
-    {
-        return view('admin.pelanggan.create');
-    }
+ public function create()
+{
+    return view('pelanggan.create');
+}
 
     /**
      * Menyimpan data pelanggan baru ke database.
@@ -60,10 +60,10 @@ class PelangganController extends Controller
     /**
      * Menampilkan form untuk mengedit data pelanggan.
      */
-    public function edit(string $id)
+public function edit($id)
 {
-    $data['dataPelanggan'] = Pelanggan::findOrFail($id);
-    return view('admin.pelanggan.edit', $data);
+    $dataPelanggan = Pelanggan::findOrFail($id);
+    return view('pelanggan.edit', compact('dataPelanggan'));
 }
     /**
      * Mengubah/meng-update data pelanggan di database.
