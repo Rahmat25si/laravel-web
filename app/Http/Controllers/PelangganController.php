@@ -8,46 +8,57 @@ use Illuminate\Http\Request;
 class PelangganController extends Controller
 {
     /**
-     * Menampilkan daftar semua data pelanggan.
+     * Menampilkan daftar semua data pelanggan (lengkap dengan Filter & Pagination).
      */
-   public function index()
+public function index(Request $request)
 {
-    $pelanggan = Pelanggan::all();
+    // Kolom yang dapat difilter
+    $filterableColumns = ['gender'];
+
+    // Kolom yang dapat dicari (Search)
+    $searchableColumns = ['first_name', 'last_name', 'email', 'phone'];
+
+    // Query data dengan Filter, Search, Pagination, dan Query String
+    $pelanggan = Pelanggan::filter($request, $filterableColumns)
+                        ->search($request, $searchableColumns)
+                        ->paginate(10)
+                        ->withQueryString();
+
     return view('pelanggan.index', compact('pelanggan'));
 }
 
     /**
      * Menampilkan form untuk menambah data pelanggan baru.
      */
- public function create()
-{
-    return view('pelanggan.create');
-}
+    public function create()
+    {
+        return view('pelanggan.create');
+    }
 
     /**
      * Menyimpan data pelanggan baru ke database.
      */
-   public function store(Request $request)
-{
-    // Tambahkan validasi ini
-    $request->validate([
-        'email' => 'required|email|unique:pelanggan,email',
-    ], [
-        'email.unique' => 'Email ini sudah terdaftar, silakan gunakan email lain!'
-    ]);
+    public function store(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email|unique:pelanggan,email',
+        ], [
+            'email.unique' => 'Email ini sudah terdaftar, silakan gunakan email lain!'
+        ]);
 
-    $data['first_name'] = $request->first_name;
-    $data['last_name']  = $request->last_name;
-    $data['birthday']   = $request->birthday;
-    $data['gender']     = $request->gender;
-    $data['email']      = $request->email;
-    $data['phone']      = $request->phone;
+        $data['first_name'] = $request->first_name;
+        $data['last_name']  = $request->last_name;
+        $data['birthday']   = $request->birthday;
+        $data['gender']     = $request->gender;
+        $data['email']      = $request->email;
+        $data['phone']      = $request->phone;
 
-    Pelanggan::create($data);
+        Pelanggan::create($data);
 
-    return redirect()->route('pelanggan.index')
-                     ->with('success', 'Penambahan Data Pelanggan Berhasil!');
-}
+        return redirect()->route('pelanggan.index')
+                         ->with('success', 'Penambahan Data Pelanggan Berhasil!');
+    }
+
     /**
      * Menampilkan detail satu pelanggan.
      */
@@ -60,39 +71,39 @@ class PelangganController extends Controller
     /**
      * Menampilkan form untuk mengedit data pelanggan.
      */
-public function edit($id)
-{
-    $dataPelanggan = Pelanggan::findOrFail($id);
-    return view('pelanggan.edit', compact('dataPelanggan'));
-}
+    public function edit($id)
+    {
+        $dataPelanggan = Pelanggan::findOrFail($id);
+        return view('pelanggan.edit', compact('dataPelanggan'));
+    }
+
     /**
      * Mengubah/meng-update data pelanggan di database.
      */
-   public function update(Request $request, string $id)
-{
-    $pelanggan_id = $id;
-    $pelanggan = Pelanggan::findOrFail($pelanggan_id);
+    public function update(Request $request, string $id)
+    {
+        $pelanggan = Pelanggan::findOrFail($id);
 
-    $pelanggan->first_name = $request->first_name;
-    $pelanggan->last_name  = $request->last_name;
-    $pelanggan->birthday   = $request->birthday;
-    $pelanggan->gender     = $request->gender;
-    $pelanggan->email      = $request->email;
-    $pelanggan->phone      = $request->phone;
+        $pelanggan->first_name = $request->first_name;
+        $pelanggan->last_name  = $request->last_name;
+        $pelanggan->birthday   = $request->birthday;
+        $pelanggan->gender     = $request->gender;
+        $pelanggan->email      = $request->email;
+        $pelanggan->phone      = $request->phone;
 
-    $pelanggan->save();
+        $pelanggan->save();
 
-    return redirect()->route('pelanggan.index')->with('success', 'Perubahan Data Berhasil!');
-}
+        return redirect()->route('pelanggan.index')->with('success', 'Perubahan Data Berhasil!');
+    }
 
     /**
      * Menghapus data pelanggan dari database.
      */
     public function destroy(string $id)
-{
-    $pelanggan = Pelanggan::findOrFail($id);
-    $pelanggan->delete();
+    {
+        $pelanggan = Pelanggan::findOrFail($id);
+        $pelanggan->delete();
 
-    return redirect()->route('pelanggan.index')->with('success', 'Data Pelanggan Berhasil Dihapus!');
-}
+        return redirect()->route('pelanggan.index')->with('success', 'Data Pelanggan Berhasil Dihapus!');
+    }
 }

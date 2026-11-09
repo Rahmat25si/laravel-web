@@ -4,18 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 class Pelanggan extends Model
 {
     use HasFactory;
 
-    // Nama tabel di database
     protected $table = 'pelanggan';
-
-    // Primary key custom (karena bukan id bawaan)
     protected $primaryKey = 'pelanggan_id';
 
-    // Kolom yang boleh diisi secara massal (Mass Assignment)
     protected $fillable = [
         'first_name',
         'last_name',
@@ -24,4 +21,32 @@ class Pelanggan extends Model
         'email',
         'phone',
     ];
+
+    /**
+     * Scope untuk memfilter data
+     */
+    public function scopeFilter(Builder $query, $request, array $filterableColumns)
+    {
+        foreach ($filterableColumns as $column) {
+            if ($request->filled($column)) {
+                $query->where($column, $request->input($column));
+            }
+        }
+        return $query;
+    }
+
+    /**
+     * Scope untuk pencarian kata kunci (Search)
+     */
+    public function scopeSearch(Builder $query, $request, array $columns)
+    {
+        if ($request->filled('search')) {
+            $query->where(function($q) use ($request, $columns) {
+                foreach ($columns as $column) {
+                    $q->orWhere($column, 'LIKE', '%' . $request->search . '%');
+                }
+            });
+        }
+        return $query;
+    }
 }
